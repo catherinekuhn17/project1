@@ -95,9 +95,13 @@ class Parser:
             # You will need to look at the `Try` / `Except` keywords in python
             # and implement an exception for the error you will find in
             # the error message you receive. 
+           # while True:
             while True:
-                rec = self.get_record(f_obj)
-                yield rec
+                try:
+                    rec = self.get_record(f_obj)
+                    yield rec
+                except (StopIteration, RuntimeError):
+                    return
 
     def _get_record(self, f_obj: io.TextIOWrapper) -> Union[Tuple[str, str], Tuple[str, str, str]]:
         """
@@ -113,18 +117,43 @@ class FastaParser(Parser):
     """
     Fasta Specific Parsing
     """
+    def __init__(self, filename: str):
+        """
+        Initialization
+        """
+        self.filename = filename
+        
     def _get_record(self, f_obj: io.TextIOWrapper) -> Tuple[str, str]:
         """
         returns the next fasta record
         """
+        name = next(f_obj).rstrip()
+        seq = next(f_obj).rstrip()
+        
+        return (name, seq)
+
+        
 
 
 class FastqParser(Parser):
     """
     Fastq Specific Parsing
     """
+    def __init__(self, filename: str):
+        """
+        Initialization
+        """
+        self.filename = filename
+        
     def _get_record(self, f_obj: io.TextIOWrapper) -> Tuple[str, str, str]:
         """
         returns the next fastq record
         """
+        
+        name = next(f_obj).rstrip()
+        seq = next(f_obj).rstrip()
+        ast = next(f_obj).rstrip()
+        qual = next(f_obj).rstrip()
+        
+        return (name, seq, qual)
 
