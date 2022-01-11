@@ -1,5 +1,5 @@
 # write tests for parsers
-
+from typing import Tuple, Union
 from seqparser import (
         FastaParser,
         FastqParser)
@@ -66,9 +66,7 @@ def test_FastqParser():
 'TGTGGTCGTATAGTTATTGTCATAAATTACACAGAATCGCGATTCTCCGCGTCCACCAATCTTAGTGCACCACAGCATCGACCCGATTTATGACGCTGAG')
     # Check if last record is what is expected from test file
     assert record_list[99][0:2] == ('@seq99',
-'CCGAGTTTTGTAGTGGGCTCAACTGAAATCCTATTCTTAGACGATTGGTCATAAAACCCTTTCACTGTACGGACGTAGACCCTGCTCCGTCTTCCAGCAG'
-
-)
+'CCGAGTTTTGTAGTGGGCTCAACTGAAATCCTATTCTTAGACGATTGGTCATAAAACCCTTTCACTGTACGGACGTAGACCCTGCTCCGTCTTCCAGCAG')
     # Check if length of individual record is what is expected
     assert len(record_list[0]) == 3
     # Check if all records are read

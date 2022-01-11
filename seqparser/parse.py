@@ -100,7 +100,9 @@ class Parser:
                 try:
                     rec = self.get_record(f_obj)
                     yield rec
-                except (StopIteration, RuntimeError):
+                # StopIteration and RuntimeError occur when next runs out of things to itterate, which is when we
+                # have read all of the records, and so should return
+                except (StopIteration, RuntimeError): 
                     return
 
     def _get_record(self, f_obj: io.TextIOWrapper) -> Union[Tuple[str, str], Tuple[str, str, str]]:
@@ -127,6 +129,8 @@ class FastaParser(Parser):
         """
         returns the next fasta record
         """
+        # assigning the next lines in f_obj, and removing trailing character. These are put into the tuple with the 
+        # name and the sequence 
         name = next(f_obj).rstrip()
         seq = next(f_obj).rstrip()
         
@@ -149,10 +153,11 @@ class FastqParser(Parser):
         """
         returns the next fastq record
         """
-        
+        # assigning the next lines in f_obj, and removing trailing character. These are put into the tuple with the 
+        # name, the sequence, and the quality score 
         name = next(f_obj).rstrip()
         seq = next(f_obj).rstrip()
-        ast = next(f_obj).rstrip()
+        plus = next(f_obj).rstrip()
         qual = next(f_obj).rstrip()
         
         return (name, seq, qual)
