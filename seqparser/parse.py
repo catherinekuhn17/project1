@@ -154,7 +154,8 @@ class FastqParser(Parser):
         returns the next fastq record
         """
         # assigning the next lines in f_obj, and removing trailing character. These are put into the tuple with the 
-        # name, the sequence, and the quality score 
+        # name, the sequence, and the quality score. The plus character line is not used in the final tuple, but must be
+        # read to properly read entire record.
         name = next(f_obj).rstrip()
         seq = next(f_obj).rstrip()
         plus = next(f_obj).rstrip()
