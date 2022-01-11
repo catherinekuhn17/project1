@@ -36,6 +36,9 @@ def test_FastaParser():
         record_list.append(record)
     # Check if first record is what is expected from test file
     assert record_list[0] == ('>seq0','TGATTGAATCTTTTGAGGGTCACGGCCCGGAAGCCAGAATTTCGGGGTCCTCTGTGGATATTAATCGAGCCCACACGGTGTGAGTTCAGCGGCCCCCGCA')
+    # Check if middle record is what is expected from test file
+    assert record_list[50] == ('>seq50',
+'TTTTGTATGTAGGAAAAAGGTTCTTAATCATTGCGCACTTCCCGCAGGCAGTGCACTTTCGCAGTCTTAGAAATAAGGAGGATAGTCTGTACCCGGCTCT')
     # Check if last record is what is expected from test file
     assert record_list[99] == ('>seq99',
 'CAAACCGGCGATGCGGGTACTCCCTACAAGTTGGACTCCGCAGCGAACGCCGCAGGGGCCATTATACGGCGGTCTTGGCGGCGTCGACCAGGCCGGTCCA')
@@ -64,6 +67,9 @@ def test_FastqParser():
     # on the right side of the equal sign
     assert record_list[0][0:2] == ('@seq0',
 'TGTGGTCGTATAGTTATTGTCATAAATTACACAGAATCGCGATTCTCCGCGTCCACCAATCTTAGTGCACCACAGCATCGACCCGATTTATGACGCTGAG')
+    # Check if middle record is what is expected from test file
+    assert record_list[50][0:2] == ('@seq50',
+'ACGGCACGTAAACCTTATCTCTGCGCTGTCGATCGTGTTTGGTAAACAGAGCGGGATGAAATTTTCTTTGGTCGAGAGTGTTGAAGTACTGTCCACTACA')
     # Check if last record is what is expected from test file
     assert record_list[99][0:2] == ('@seq99',
 'CCGAGTTTTGTAGTGGGCTCAACTGAAATCCTATTCTTAGACGATTGGTCATAAAACCCTTTCACTGTACGGACGTAGACCCTGCTCCGTCTTCCAGCAG')
